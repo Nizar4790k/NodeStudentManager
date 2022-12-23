@@ -1,10 +1,37 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router";
 
-const NavBar = ({ fullName, onSignOut, selectedTab }) => {
+const NavBar = ({ onSignOut, selectedTab }) => {
+
+    const [fullName,setFullName] = useState('')
 
     const navigate = useNavigate();
+
+
+    
+
+    
+
+      useEffect(()=>{const loadUser = () =>{
+    
+        const user = JSON.parse(sessionStorage.getItem("user"))
+        console.log(user)
+        if(user){
+          
+            if(fullName!=user.fullName){
+                setFullName(user.fullName)
+            }
+            console.log(user.fullName)
+            
+          
+        }else{
+          navigate('/Login')
+        }
+        
+      }
+      loadUser()
+    },[fullName])
 
     return (
         <header className="header">
@@ -26,9 +53,15 @@ const NavBar = ({ fullName, onSignOut, selectedTab }) => {
                                 selectedTab === "StudentList" ?
                                     <li className="nav-item active"><Link to="/StudentList" className="nav-link">Estudiantes</Link></li>
                                     : <li className="nav-item"><Link to="/StudentList" className="nav-link">Estudiantes</Link></li>
-                            }
 
+                            }
                             
+                            {
+                                selectedTab === "GradeList" ?
+                                <li className="nav-item active"><Link to="/StudentList" className="nav-link">Calificaciones</Link></li>
+                                : <li className="nav-item"><Link to="/StudentList" className="nav-link">Calificaciones</Link></li>
+                            }
+                           
 
 
 

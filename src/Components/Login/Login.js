@@ -3,7 +3,7 @@ import { useNavigate } from "react-router";
 import "./Login.css";
 
 
-const Login = ({ onLoadUser }) => {
+const Login = ({ onSignIn }) => {
 
 
     const [email, setEmail] = useState("");
@@ -52,7 +52,7 @@ const Login = ({ onLoadUser }) => {
                     case "ACCESS_GRANTED":
 
                         sessionStorage.setItem('user', JSON.stringify(result.user));
-                        onLoadUser(result.user);
+                        onSignIn(result.user);
                         navigate("/StudentList");
 
                         break;

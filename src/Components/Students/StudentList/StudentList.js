@@ -9,9 +9,11 @@ const StudentList = (props) => {
 
     const [students, setStudents] = useState([]);
 
-    const { user, onSignOut,onSelectStudent} = props;
+    const { user, onSignOut,onSelectStudent,loadUser} = props;
 
     const navigate = useNavigate();
+
+    //loadUser(navigate)
 
     /*
     const students = [
@@ -49,7 +51,7 @@ const StudentList = (props) => {
     return (
         <div>
 
-            <NavBar fullName={user.fullName} onSignOut={onSignOut} selectedTab="StudentList" />
+            <NavBar onSignOut={onSignOut} selectedTab="StudentList" loadUser={loadUser} />
             <h1>Lista de productos</h1>
 
             <div className="container">
