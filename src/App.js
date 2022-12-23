@@ -1,23 +1,54 @@
-import logo from './logo.svg';
+import React,{ useState } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Login from './Components/Login/Login';
+import Register from './Components/Register/Register';
+import StudentList from './Components/Students/StudentList/StudentList';
+import StudentFormCreate from './Components/Students/StudentCreate/StudentFormCreate';
+import StudentFormUpdate from './Components/Students/StudentUpdate/StudentFormUpdate';
+
 import './App.css';
 
+
 function App() {
+  const [user, setUser] = useState({});
+  const [selectStudent,setSelectedStudent] = useState({})
+
+  const onLoadUser = (user) => {
+    sessionStorage.setItem('user', JSON.stringify(user));
+    setUser(user);
+  };
+
+  const onSignOut = () => {
+    sessionStorage.clear();
+    setUser({});
+  };
+
+  const onSelectStudent = (student)=>{
+    console.log(student)
+        
+    setSelectedStudent(student)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <div>
+      <Router>
+        <Routes>
+          <Route path="/" element={<Login onLoadUser={onLoadUser} />}></Route>
+          <Route
+            path="/Login"
+            element={<Login onLoadUser={onLoadUser} />}
+          ></Route>
+          <Route path="/Register" element={<Register />} />
+          <Route
+            path="/StudentList"
+            element={<StudentList user={user} onSignOut={onSignOut} onSelectStudent={onSelectStudent} />}
+          />
+          <Route path="/StudentFormCreate" element={<StudentFormCreate />} />
+          <Route path="/StudentFormUpdate" element={<StudentFormUpdate student={selectStudent}/>} />
+        </Routes>
+      </Router>
+    </div>
     </div>
   );
 }
