@@ -13,7 +13,9 @@ const NavBar = ({ onSignOut, selectedTab }) => {
 
     
 
-      useEffect(()=>{const loadUser = () =>{
+      useEffect(()=>{
+        
+        const loadUser = () =>{
     
         const user = JSON.parse(sessionStorage.getItem("user"))
         console.log(user)
@@ -58,8 +60,8 @@ const NavBar = ({ onSignOut, selectedTab }) => {
                             
                             {
                                 selectedTab === "GradeList" ?
-                                <li className="nav-item active"><Link to="/StudentList" className="nav-link">Calificaciones</Link></li>
-                                : <li className="nav-item"><Link to="/StudentList" className="nav-link">Calificaciones</Link></li>
+                                <li className="nav-item active"><Link to="/GradeList" className="nav-link">Calificaciones</Link></li>
+                                : <li className="nav-item"><Link to="/GradeList" className="nav-link">Calificaciones</Link></li>
                             }
                            
 

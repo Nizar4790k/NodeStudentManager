@@ -9,6 +9,7 @@ import StudentFormCreate from './Components/Students/StudentCreate/StudentFormCr
 import StudentFormUpdate from './Components/Students/StudentUpdate/StudentFormUpdate';
 
 import './App.css';
+import GradeList from './Components/Grades/GradeList/GradeList';
 
 
 function App() {
@@ -61,6 +62,12 @@ function App() {
             path="/StudentList"
             element={<StudentList user={user} onSignOut={onSignOut} onSelectStudent={onSelectStudent} loadUser={loadUser} />}
           />
+
+          <Route
+            path="/GradeList"
+            element={<GradeList user={user} onSignOut={onSignOut} onSelectStudent={onSelectStudent} loadUser={loadUser} />}
+          />
+
           <Route path="/StudentFormCreate" element={<StudentFormCreate />} />
           <Route path="/StudentFormUpdate" element={<StudentFormUpdate student={selectStudent}/>} />
         </Routes>

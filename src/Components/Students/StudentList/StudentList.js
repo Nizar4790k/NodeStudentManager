@@ -52,7 +52,7 @@ const StudentList = (props) => {
         <div>
 
             <NavBar onSignOut={onSignOut} selectedTab="StudentList" loadUser={loadUser} />
-            <h1>Lista de productos</h1>
+            <h1>Lista de Estudiantes</h1>
 
             <div className="container">
                 <br />

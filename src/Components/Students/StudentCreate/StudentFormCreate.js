@@ -11,7 +11,10 @@ const createStudent = async () => {
   const sexo = document.getElementById('sexo-masculino-radio').checked ? "Masculino": "Femenino"
   console.log(sexo);
 
-  const student = { nombre: nombre, fechaNacimiento: fechaNacimiento,sexo:sexo };
+  const student = { nombre: nombre, fechaNacimiento: fechaNacimiento,sexo:sexo,
+    materias:{espanol:[0,0,0,0],matematicas:[0,0,0,0],naturales:[0,0,0,0],sociales:[0,0,0,0]}
+  
+  };
 
   const response = await fetch(`${process.env.REACT_APP_SERVER}/students`, {
     method: "post",
@@ -82,7 +85,7 @@ const StudentFormCreate = () => {
                 name="sexo"
                 id="sexo-masculino-radio"
                 value="Masculino"
-                checked
+                defaultChecked
               />
               <label className="form-check-label" htmlFor="sexo-masculino-radio">
                 Masculino
