@@ -11,36 +11,41 @@ const GradeList = (props) => {
     const [grades, setGrades] = useState([]);
     const [subject,setSubject] = useState("Lengua Española")
 
-    const { user, onSignOut, loadUser } = props;
+    const { user, onSignOut, loadUser,onSelectGrade } = props;
 
     
 
+   
+    const fetchGrades = async () => {
 
+        
 
+        const response = await fetch(`${process.env.REACT_APP_SERVER}/grades?subject=${subject}`);
+        const grades = await response.json();
+        console.log(grades)
+        setGrades(grades)
+       
 
-    useEffect(() => {
+    }
 
-        const fetchGrades = async () => {
+    useEffect( () => {
 
-            const response = await fetch(`${process.env.REACT_APP_SERVER}/grades?subject=${subject}`);
-            const grades = await response.json();
-            console.log(grades)
-            setGrades(grades)
-    
-        }
-
+        
         fetchGrades()
+        
 
 
     }, [subject]);
 
 
     
+    
 
-    const onChangeSubject = (subject)=>{
-        console.log(subject)
-        setSubject(subject)
+    const onChangeSubject = (newSubject)=>{
+        setSubject(newSubject)
     }
+
+    
 
 
 
@@ -80,17 +85,17 @@ const GradeList = (props) => {
                         <tr>
                             <th scope="col">#</th>
                             <th scope="col">Nombre</th>
-                            <th scope="col">Primer Parcial</th>
-                            <th scope="col">Segundo Parcial</th>
-                            <th scope="col">Tareas o Practicas</th>
-                            <th scope="col">Examen Final</th>
+                            <th scope="col">{"Primer Parcial (20pts)"}</th>
+                            <th scope="col">{"Segundo Parcial (20pts)"}</th>
+                            <th scope="col">{"Tareas o Practicas (30pts)"}</th>
+                            <th scope="col">{"Examen Final (30pts)"}</th>
                         </tr>
                     </thead>
                     <tbody>
 
                         {grades.map((grade, row) => {
 
-                            return <GradeItem grade={grade} key={row + 1} row={row + 1}  subject={subject}  />
+                            return <GradeItem grade={grade} key={row + 1} row={row + 1} fetchGrades={fetchGrades} subject={subject} onSelectGrade={onSelectGrade} />
                         })}
 
 

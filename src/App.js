@@ -10,12 +10,15 @@ import StudentFormUpdate from './Components/Students/StudentUpdate/StudentFormUp
 
 import './App.css';
 import GradeList from './Components/Grades/GradeList/GradeList';
+import GradeFormUpdate from './Components/Grades/GradeFormUpdate/GradeFormUpdate';
 
 
 function App() {
   const [user, setUser] = useState({});
   const [selectStudent,setSelectedStudent] = useState({})
-
+  
+  const [selectedGrade,setSelectedGrade] = useState({})
+  
 
 
   const onSignIn = (user) => {
@@ -47,6 +50,12 @@ function App() {
     setSelectedStudent(student)
   }
 
+  const onSelectGrade = (grade)=>{
+    console.log(grade)
+        
+    setSelectedGrade(grade)
+  }
+
   return (
     <div>
       <div>
@@ -65,8 +74,11 @@ function App() {
 
           <Route
             path="/GradeList"
-            element={<GradeList user={user} onSignOut={onSignOut} loadUser={loadUser} />}
+            element={<GradeList user={user} onSignOut={onSignOut} loadUser={loadUser} onSelectGrade={onSelectGrade}/>}
           />
+        
+        <Route path="/GradeFormUpdate" element={<GradeFormUpdate grade={selectedGrade}/>} />
+         
 
           <Route path="/StudentFormCreate" element={<StudentFormCreate />} />
           <Route path="/StudentFormUpdate" element={<StudentFormUpdate student={selectStudent}/>} />
