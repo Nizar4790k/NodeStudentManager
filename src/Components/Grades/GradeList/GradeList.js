@@ -11,30 +11,34 @@ const GradeList = (props) => {
     const [grades, setGrades] = useState([]);
     const [subject,setSubject] = useState("Lengua Española")
 
-    const { user, onSignOut, onSelectStudent, loadUser } = props;
+    const { user, onSignOut, loadUser } = props;
 
-    const navigate = useNavigate();
+    
 
 
 
 
     useEffect(() => {
 
-        //fetchGrades()
+        const fetchGrades = async () => {
+
+            const response = await fetch(`${process.env.REACT_APP_SERVER}/grades?subject=${subject}`);
+            const grades = await response.json();
+            console.log(grades)
+            setGrades(grades)
+    
+        }
+
+        fetchGrades()
 
 
     }, [subject]);
 
 
-    const fetchGrades = async () => {
-
-        const response = await fetch(`${process.env.REACT_APP_SERVER}/grades?subject=${subject}`);
-        const grades = await response.json();
-        setGrades(grades)
-
-    }
+    
 
     const onChangeSubject = (subject)=>{
+        console.log(subject)
         setSubject(subject)
     }
 
@@ -52,13 +56,13 @@ const GradeList = (props) => {
                 <br />
 
 
-                <div class="dropdown">
-                    <button class="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <div className="dropdown">
+                    <button className="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {subject}
                     </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                    <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <button className="dropdown-item" onClick={()=>{onChangeSubject("Lengua Española")}}>Lengua Española</button>
-                        <button className="dropdown-item" onClick={()=>{onChangeSubject("Matemáticas")}}>Matematicas</button>
+                        <button className="dropdown-item" onClick={()=>{onChangeSubject("Matemáticas")}}>Matemáticas</button>
                         <button className="dropdown-item" onClick={()=>{onChangeSubject("Ciencias Naturales")}}>Ciencias Naturales</button>
                         <button className="dropdown-item" onClick={()=>{onChangeSubject("Ciencias Sociales")}}>Ciencias Sociales</button>
                         
@@ -84,9 +88,9 @@ const GradeList = (props) => {
                     </thead>
                     <tbody>
 
-                        {grades.map((grades, row) => {
+                        {grades.map((grade, row) => {
 
-                            return <GradeItem grades={grades} key={row + 1} row={row + 1} fetchGrades={fetchGrades} onSelectStudent={onSelectStudent} />
+                            return <GradeItem grade={grade} key={row + 1} row={row + 1}  subject={subject}  />
                         })}
 
 

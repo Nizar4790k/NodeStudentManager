@@ -65,7 +65,7 @@ function App() {
 
           <Route
             path="/GradeList"
-            element={<GradeList user={user} onSignOut={onSignOut} onSelectStudent={onSelectStudent} loadUser={loadUser} />}
+            element={<GradeList user={user} onSignOut={onSignOut} loadUser={loadUser} />}
           />
 
           <Route path="/StudentFormCreate" element={<StudentFormCreate />} />
