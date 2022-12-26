@@ -11,9 +11,14 @@ const createStudent = async () => {
   const sexo = document.getElementById('sexo-masculino-radio').checked ? "Masculino": "Femenino"
   console.log(sexo);
 
-  const student = { nombre: nombre, fechaNacimiento: fechaNacimiento,sexo:sexo,
-    materias:{espanol:[0,0,0,0],matematicas:[0,0,0,0],naturales:[0,0,0,0],sociales:[0,0,0,0]}
+
   
+  
+
+
+  const student = { nombre: nombre, fechaNacimiento: fechaNacimiento,sexo:sexo,
+    materias:{espanol:[0,0,0,0],matematicas:[0,0,0,0],naturales:[0,0,0,0],sociales:[0,0,0,0]},
+    asistencia:[{fecha:new Date().toISOString().split('T')[0],status:"P",notes:""}]
   };
 
   const response = await fetch(`${process.env.REACT_APP_SERVER}/students`, {

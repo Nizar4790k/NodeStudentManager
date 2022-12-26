@@ -11,6 +11,8 @@ import StudentFormUpdate from './Components/Students/StudentUpdate/StudentFormUp
 import './App.css';
 import GradeList from './Components/Grades/GradeList/GradeList';
 import GradeFormUpdate from './Components/Grades/GradeFormUpdate/GradeFormUpdate';
+import TodayAssistanceList from './Components/Assistance/TodayAssistanceList/TodayAssistanceList';
+import PastAssistanceList from './Components/Assistance/PastAssistanceList/PastAssistanceList';
 
 
 function App() {
@@ -18,6 +20,7 @@ function App() {
   const [selectStudent,setSelectedStudent] = useState({})
   
   const [selectedGrade,setSelectedGrade] = useState({})
+  
   
 
 
@@ -56,6 +59,8 @@ function App() {
     setSelectedGrade(grade)
   }
 
+ 
+
   return (
     <div>
       <div>
@@ -72,16 +77,34 @@ function App() {
             element={<StudentList user={user} onSignOut={onSignOut} onSelectStudent={onSelectStudent} loadUser={loadUser} />}
           />
 
+          <Route path="/StudentFormCreate" element={<StudentFormCreate />} />
+          <Route path="/StudentFormUpdate" element={<StudentFormUpdate student={selectStudent}/>} />
+
           <Route
             path="/GradeList"
             element={<GradeList user={user} onSignOut={onSignOut} loadUser={loadUser} onSelectGrade={onSelectGrade}/>}
           />
-        
-        <Route path="/GradeFormUpdate" element={<GradeFormUpdate grade={selectedGrade}/>} />
+         <Route path="/GradeFormUpdate" element={<GradeFormUpdate grade={selectedGrade}/>} />
          
 
-          <Route path="/StudentFormCreate" element={<StudentFormCreate />} />
-          <Route path="/StudentFormUpdate" element={<StudentFormUpdate student={selectStudent}/>} />
+         <Route
+            path="/StudentList"
+            element={<StudentList user={user} onSignOut={onSignOut} onSelectStudent={onSelectStudent} loadUser={loadUser} />}
+          />
+         
+         <Route
+            path="/PastAssistanceList"
+            element={<PastAssistanceList user={user} loadUser={loadUser}/>}
+          />
+
+        <Route
+            path="/TodayAssistanceList"
+            element={<TodayAssistanceList user={user} loadUser={loadUser}/>}
+          />
+
+          
+
+          
         </Routes>
       </Router>
     </div>
