@@ -10,12 +10,12 @@ const NavBar = ({ onSignOut, selectedTab }) => {
   useEffect(() => {
     const loadUser = () => {
       const user = JSON.parse(sessionStorage.getItem("user"));
-      console.log(user);
+     
       if (user) {
         if (fullName != user.fullName) {
           setFullName(user.fullName);
         }
-        console.log(user.fullName);
+        
       } else {
         navigate("/Login");
       }
