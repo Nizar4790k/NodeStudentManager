@@ -8,27 +8,19 @@ import "./StudentList.css";
 const StudentList = (props) => {
 
     const [students, setStudents] = useState([]);
+    const [studentName, setStudentName] = useState("")
 
-    const { user, onSignOut,onSelectStudent,loadUser} = props;
+    const { user, onSignOut, onSelectStudent, loadUser } = props;
 
     const navigate = useNavigate();
 
-    //loadUser(navigate)
-
-    /*
-    const students = [
-    {name:"Manzana Roja",price:10},
-    {name:"Coca Cola",price:15},
-    {name:"Pan",price:5},
-    {name:"Pica Pollo",price:200}
-    ]
-    */
 
 
-    useEffect( () => {
+
+    useEffect(() => {
 
         fetchStudents()
-        
+
 
     }, []);
 
@@ -42,10 +34,28 @@ const StudentList = (props) => {
     }
 
 
+    const fetchStudentsByName = async () => {
+
+        const response = await fetch(`${process.env.REACT_APP_SERVER}/students?nombre=${studentName}`);
+        const students = await response.json();
+        setStudents(students)
+
+    }
+
+    useEffect(() => {
+        fetchStudentsByName()
+
+    }, [studentName])
+
+
+
     const goToCreateStudent = () => {
         navigate('/StudentFormCreate');
     }
 
+    const onInputChange = (event) => {
+        setStudentName(event.target.value)
+    }
 
 
     return (
@@ -53,8 +63,15 @@ const StudentList = (props) => {
 
             <NavBar onSignOut={onSignOut} selectedTab="StudentList" loadUser={loadUser} />
             <h1>Lista de Estudiantes</h1>
-
             <div className="container">
+
+                <br />
+                <br />
+
+                <div className="col-6">
+                    <input className="form-control  mb-2 mr-sm-2" type="text" placeholder="Buscar estudiante por nombre" aria-label="" onChange={onInputChange}></input>
+                </div>
+
                 <br />
                 <br />
                 <button type="button" className="btn btn-success btn-lg" onClick={goToCreateStudent}>Agregar Estudiante</button>
