@@ -62,7 +62,7 @@ const PastAssistanceList = (props) => {
         <div>
 
             <NavBar onSignOut={onSignOut} selectedTab="Lista de Asistencia" loadUser={loadUser} />
-            <h1>Lista de Asistencia</h1>
+            <h1>Lista de Asistencia por Fechas</h1>
 
             <div className="container">
                 <br />
@@ -70,7 +70,7 @@ const PastAssistanceList = (props) => {
 
                 <div className="form-group">
                     <label>Fecha del Pase de Lista</label>
-                    <div className="col-md-10">
+                    <div className="col-md-4">
                     <input
                     type="date"
                     id="fecha-asistencia"
@@ -86,12 +86,7 @@ const PastAssistanceList = (props) => {
                 
                 </div>
                 <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
-                <br />
+                
                 <table className="table table-striped table-bordered table-hover">
                     <thead className="thead-dark">
                         <tr>

@@ -63,7 +63,6 @@ function App() {
 
   return (
     <div>
-      <div>
       <Router>     
         <Routes>
           <Route path="/" element={<Login onSignIn={onSignIn} />}></Route>
@@ -77,14 +76,14 @@ function App() {
             element={<StudentList user={user} onSignOut={onSignOut} onSelectStudent={onSelectStudent} loadUser={loadUser} />}
           />
 
-          <Route path="/StudentFormCreate" element={<StudentFormCreate />} />
+          <Route path="/StudentFormCreate" element={<StudentFormCreate onSignOut={onSignOut} loadUser={loadUser} />} />
           <Route path="/StudentFormUpdate" element={<StudentFormUpdate student={selectStudent}/>} />
 
           <Route
             path="/GradeList"
             element={<GradeList user={user} onSignOut={onSignOut} loadUser={loadUser} onSelectGrade={onSelectGrade}/>}
           />
-         <Route path="/GradeFormUpdate" element={<GradeFormUpdate grade={selectedGrade}/>} />
+         <Route path="/GradeFormUpdate" element={<GradeFormUpdate grade={selectedGrade} onSignOut={onSignOut} loadUser={loadUser}/>} />
          
 
          <Route
@@ -94,12 +93,12 @@ function App() {
          
          <Route
             path="/PastAssistanceList"
-            element={<PastAssistanceList user={user} loadUser={loadUser}/>}
+            element={<PastAssistanceList user={user} loadUser={loadUser} onSignOut={onSignOut}/>}
           />
 
         <Route
             path="/TodayAssistanceList"
-            element={<TodayAssistanceList user={user} loadUser={loadUser}/>}
+            element={<TodayAssistanceList user={user} loadUser={loadUser} onSignOut={onSignOut}/>}
           />
 
           
@@ -107,7 +106,7 @@ function App() {
           
         </Routes>
       </Router>
-    </div>
+    
     </div>
   );
 }

@@ -3,6 +3,7 @@ import NavBar from "../../NavBar/NavBar";
 
 import { useNavigate } from "react-router";
 import TodayAssistenceListItem from "./TodayAssistanceListItem/TodayAssistanceListItem";
+import './TodayAssistanceList.css'
 
 
 const TodayAssistanceList = (props) => {
@@ -49,15 +50,12 @@ const TodayAssistanceList = (props) => {
     return (
         <div>
 
-            <NavBar onSignOut={onSignOut} selectedTab="TodayAsistanceList" loadUser={loadUser} />
-            <h1>Lista de Calificaciones</h1>
+            <NavBar onSignOut={onSignOut} selectedTab="Lista de Asistencia" loadUser={loadUser} />
+            <h1>Lista de Asistencia de Hoy</h1>
 
             <div className="container">
                 <br />
                 <br />
-
-
-                
                 </div>
                 <br />
                 <br />
@@ -70,9 +68,10 @@ const TodayAssistanceList = (props) => {
                     <thead className="thead-dark">
                         <tr>
                             <th scope="col">#</th>
-                            <th scope="col">Nombre</th>
+                            <th scope="col">{"Nota"}</th>
                             <th scope="col">{"Estado de Asistencia"}</th>
                             <th scope="col">{"Nota"}</th>
+                            <th scope="col">{"Acciones"}</th>
 
                         </tr>
                     </thead>

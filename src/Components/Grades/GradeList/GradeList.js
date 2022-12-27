@@ -61,6 +61,7 @@ const GradeList = (props) => {
                 <br />
 
 
+
                 <div className="dropdown">
                     <button className="btn btn-info dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {subject}
@@ -77,10 +78,7 @@ const GradeList = (props) => {
                 <br />
                 <br />
                 <br />
-                <br />
-                <br />
-                <br />
-                <table className="table table-striped table-bordered table-hover">
+                <table className="table table-striped table-bordered table-hover table-center">
                     <thead className="thead-dark">
                         <tr>
                             <th scope="col">#</th>
@@ -89,6 +87,9 @@ const GradeList = (props) => {
                             <th scope="col">{"Segundo Parcial (20pts)"}</th>
                             <th scope="col">{"Tareas o Practicas (30pts)"}</th>
                             <th scope="col">{"Examen Final (30pts)"}</th>
+                            <th scope="col">{"Total"}</th>
+                            <th scope="col">{"Literal"}</th>
+                            <th scope="col">{"Acciones"}</th>
                         </tr>
                     </thead>
                     <tbody>

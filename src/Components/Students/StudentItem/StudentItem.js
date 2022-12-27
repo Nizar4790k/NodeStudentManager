@@ -39,8 +39,19 @@ const StudentItem = ({ student, row ,fetchStudents,onSelectStudent}) => {
             <td>{student.fechaNacimiento}</td>
             <td>{student.sexo}</td>
             <td>
-                <button className="btn btn-danger" onClick={() => { deleteStudent(student._id,fetchStudents)}}>Eliminar</button>
-                <button className="btn btn-warning" onClick={() => {goToStudentFormUpdate()}}>Actualizar</button>
+                <div className="form-group row">
+                    <div className="col-md-4">
+                    <button className="btn btn-danger" onClick={() => { deleteStudent(student._id,fetchStudents)}}>Eliminar</button>
+                    </div>
+
+                    <div className="col-md-4">
+                    <button className="btn btn-warning" onClick={() => {goToStudentFormUpdate()}}>Actualizar</button>
+                    </div>
+                    
+                    
+
+                </div>
+                
             </td>
         </tr>
 

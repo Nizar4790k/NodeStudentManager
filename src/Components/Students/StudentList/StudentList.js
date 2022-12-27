@@ -84,6 +84,7 @@ const StudentList = (props) => {
                             <th scope="col">Nombre</th>
                             <th scope="col">Fecha Nacimiento(yyyy-mm-dd)</th>
                             <th scope="col">Sexo</th>
+                            <th scope="col">Acciones</th>
                         </tr>
                     </thead>
                     <tbody>

@@ -1,35 +1,42 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
+
+import NavBar from "../../NavBar/NavBar";
 
 const updateGrade = async (grade) => {
   
 
+    const primerParcial = document.getElementById("primer-parcial").value;
+    const segundoParcial = document.getElementById("segundo-parcial").value;
+    const practicasYtareas = document.getElementById("practicas-tareas").value;
+    const examenFinal = document.getElementById("examen-final").value;
+
   
     if(grade.materias.espanol){
-        grade.materias.espanol[0]= document.getElementById("primer-parcial").value;
-        grade.materias.espanol[1]= document.getElementById("segundo-parcial").value;
-        grade.materias.espanol[2]= document.getElementById("practicas-tareas").value;
-        grade.materias.espanol[3]= document.getElementById("examen-final").value;
+        grade.materias.espanol[0]= primerParcial
+        grade.materias.espanol[1]= segundoParcial
+        grade.materias.espanol[2]= practicasYtareas
+        grade.materias.espanol[3]= examenFinal
 
     } else if (grade.materias.matematicas){
         console.log(grade.materias.matematica)
-        grade.materias.matematicas[0]= document.getElementById("primer-parcial").value;
-        grade.materias.matematicas[1]= document.getElementById("segundo-parcial").value;
-        grade.materias.matematicas[2]= document.getElementById("practicas-tareas").value;
-        grade.materias.matematicas[3]= document.getElementById("examen-final").value;
+        grade.materias.matematicas[0]= primerParcial
+        grade.materias.matematicas[1]= segundoParcial
+        grade.materias.matematicas[2]= practicasYtareas
+        grade.materias.matematicas[3]= examenFinal
 
     }else if (grade.materias.naturales){
 
-        grade.materias.naturales[0]= document.getElementById("primer-parcial").value;
-        grade.materias.naturales[1]= document.getElementById("segundo-parcial").value;
-        grade.materias.naturales[2]= document.getElementById("practicas-tareas").value;
-        grade.materias.naturales[3]= document.getElementById("examen-final").value;
+        grade.materias.naturales[0]= primerParcial
+        grade.materias.naturales[1]= segundoParcial
+        grade.materias.naturales[2]= practicasYtareas
+        grade.materias.naturales[3]= examenFinal
 
     }else if(grade.materias.sociales){
-        grade.materias.sociales[0]= document.getElementById("primer-parcial").value;
-        grade.materias.sociales[1]= document.getElementById("segundo-parcial").value;
-        grade.materias.sociales[2]= document.getElementById("practicas-tareas").value;
-        grade.materias.sociales[3]= document.getElementById("examen-final").value;
+        grade.materias.sociales[0]= primerParcial;
+        grade.materias.sociales[1]= segundoParcial
+        grade.materias.sociales[2]= practicasYtareas
+        grade.materias.sociales[3]= examenFinal
     }
   
 
@@ -59,8 +66,13 @@ const updateGrade = async (grade) => {
 
 };
 
-const GradeFormUpdate = ({grade}) => {
+
+
+
+const GradeFormUpdate = ({grade,onSignOut,loadUser}) => {
     
+
+  
 
     const nombreMateria = 
     grade.materias.espanol ? "Lengua Española": 
@@ -76,16 +88,32 @@ const GradeFormUpdate = ({grade}) => {
     grade.materias.naturales
 
 
+    const [primerParcial,setPrimerParcial] = useState(subject[0])
+    const [segundoParcial,setSegundoParcial] = useState(subject[1])
+    const [practicasYtareas,setPracticasYtareas] = useState(subject[2])
+    const [examenFinal,setExamenFinal] = useState(subject[3])
+   
+
   const navigate = useNavigate();
 
   const goToGradeList = () => {
     navigate("/GradeList");
   };
 
+
+
+
   
 
   return (
       <div>
+      <NavBar onSignOut={onSignOut} selectedTab="GradeList" loadUser={loadUser} />
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+
       <div className="form-horizontal">
         <h4>Actualizar Calificacion de Estudiante para la Materia {nombreMateria}</h4>
         <hr />
@@ -93,7 +121,7 @@ const GradeFormUpdate = ({grade}) => {
         <div className="form-group">
           <label>Nombre</label>
           <div className="col-md-10">
-            <input type="text" id="nombre" className="form-control" value={grade.nombre}/>
+            <input type="text" id="nombre" className="form-control" value={grade.nombre} readOnly/>
           </div>
         </div>
 
@@ -102,52 +130,125 @@ const GradeFormUpdate = ({grade}) => {
         <div className="form-group">
           <label>Primer parcial</label>
           <div className="col-md-10">
-            <input type="text" id="primer-parcial" className="form-control" defaultValue={subject[0]}/>
+            {
+              primerParcial>=0 && primerParcial<=20 ?
+              <input type="number" id="primer-parcial" className="form-control is-valid" min="0" max="20" defaultValue={primerParcial} onChange={(event)=>{setPrimerParcial(parseInt(event.target.value))}}/>
+              :<input type="number" id="primer-parcial" className="form-control is-invalid" min="0" max="20" defaultValue={primerParcial} onChange={(event)=>{setPrimerParcial(parseInt(event.target.value))}}/>
+            }
+
+            {
+               primerParcial>=0 && primerParcial<=20 ? 
+               <div class="valid-feedback">
+                  Dentro del Rango
+              </div>
+               :
+               <div class="invalid-feedback">
+                  El rango a calificar es de 0 a 20
+              </div>
+              
+            }
+           
           </div>
         </div>
 
         <div className="form-group">
           <label>Segundo Parcial</label>
           <div className="col-md-10">
-            <input type="text" id="segundo-parcial" className="form-control" defaultValue={subject[1]}/>
+            {
+              segundoParcial >=0 && segundoParcial<=20 ?
+              <input type="number" id="segundo-parcial" className="form-control is-valid" min="0" max="20" defaultValue={segundoParcial} onChange={(event)=>{setSegundoParcial(parseInt(event.target.value))}}/>
+              :<input type="number" id="segundo-parcial" className="form-control is-invalid" min="0" max="20" defaultValue={segundoParcial} onChange={(event)=>{setSegundoParcial(parseInt(event.target.value))}}/>
+            }
+
+            {
+               segundoParcial>=0 && segundoParcial<=20 ? 
+               <div class="valid-feedback">
+                  Dentro del Rango
+              </div>
+               :
+               <div class="invalid-feedback">
+                  El rango a calificar es de 0 a 20
+              </div>
+              
+            }
+           
           </div>
         </div>
 
         <div className="form-group">
-          <label>Practicas y Tareas</label>
+          <label>Tareas o Practicas</label>
           <div className="col-md-10">
-            <input type="text" id="practicas-tareas" className="form-control" defaultValue={subject[2]}/>
+            {
+              practicasYtareas >=0 && practicasYtareas<=30 ?
+              <input type="number" id="practicas-tareas" className="form-control is-valid" min="0" max="30" defaultValue={practicasYtareas} onChange={(event)=>{setPracticasYtareas(parseInt(event.target.value))}}/>
+              :<input type="number" id="practicas-tareas" className="form-control is-invalid" min="0" max="30" defaultValue={practicasYtareas} onChange={(event)=>{setPracticasYtareas(parseInt(event.target.value))}}/>
+            }
+
+            {
+               practicasYtareas>=0 && practicasYtareas<=30 ? 
+               <div class="valid-feedback">
+                  Dentro del Rango
+              </div>
+               :
+               <div class="invalid-feedback">
+                  El rango a calificar es de 0 a 30
+              </div>
+              
+            }
+           
           </div>
         </div>
 
         <div className="form-group">
           <label>Examen Final</label>
           <div className="col-md-10">
-            <input type="text" id="examen-final" className="form-control" defaultValue={subject[3]}/>
+            {
+              examenFinal >=0 && examenFinal<=30 ?
+              <input type="number" id="examen-final" className="form-control is-valid" min="0" max="30" defaultValue={examenFinal} onChange={(event)=>{setExamenFinal(parseInt(event.target.value))}}/>
+              :<input type="number" id="examen-final
+              " className="form-control is-invalid" min="0" max="30" defaultValue={examenFinal} onChange={(event)=>{setExamenFinal(parseInt(event.target.value))}}/>
+            }
+
+            {
+               segundoParcial>=0 && segundoParcial<=30 ? 
+               <div class="valid-feedback">
+                  Dentro del Rango
+              </div>
+               :
+               <div class="invalid-feedback">
+                  El rango a calificar es de 0 a 30
+              </div>
+              
+            }
+           
           </div>
         </div>
-
-
         <br />
-
-   
-
         <br />
-
-        
-
         <br />
-
         <br />
         <div>
           <div className="form-group">
             <div className="col-md-offset-2 col-md-10">
-              <button
+              {
+               (primerParcial>=0 && primerParcial<=20) &&
+               (segundoParcial>=0 && segundoParcial<=20) &&
+               (practicasYtareas>=0 && practicasYtareas<=30) &&
+               (examenFinal>=0 && examenFinal<=30)
+                ?  <button
                 value="Create"
                 className="btn btn-success"
                 onClick={()=>{updateGrade(grade)}}>
                 Update
+              </button> :<button
+                value="Create"
+                className="btn btn-success"
+                disabled
+                >
+                Update
               </button>
+              }
+            
             </div>
           </div>
         </div>

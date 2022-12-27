@@ -1,5 +1,6 @@
 import React from "react";
 import { useNavigate } from "react-router";
+import NavBar from "../../NavBar/NavBar";
 
 const createStudent = async () => {
   const campoNombre = document.getElementById("nombre");
@@ -43,7 +44,7 @@ const createStudent = async () => {
   campoFechaNacimiento.value = "";
 };
 
-const StudentFormCreate = () => {
+const StudentFormCreate = ({onSignOut,loadUser}) => {
   const navigate = useNavigate();
 
   const goTostudentList = () => {
@@ -52,6 +53,15 @@ const StudentFormCreate = () => {
 
   return (
     <div>
+
+    <NavBar onSignOut={onSignOut} selectedTab="StudentList" loadUser={loadUser} />
+    <br></br>
+    <br></br>
+    <br></br>
+    <br></br>
+    <br></br>
+    <br></br>
+
       <div className="form-horizontal">
         <h4>Crear Estudiante</h4>
         <hr />
