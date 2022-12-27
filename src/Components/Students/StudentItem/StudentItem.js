@@ -27,7 +27,6 @@ const StudentItem = ({ student, row ,fetchStudents,onSelectStudent}) => {
 
     const goToStudentFormUpdate = () => {
       navigate("/StudentFormUpdate");
-      console.log(student);
       onSelectStudent(student)
     };
 

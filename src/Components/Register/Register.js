@@ -64,7 +64,7 @@ const Register = () => {
                         break;
                     case "USER_INSERTED":
                         alert("User created suscessfully")
-                        //navigate("/Login");
+                        navigate("/Login");
                         break;
                     case "EMPTY_FIELDS":
                         alert("The field(s) can't be empty");

@@ -2,54 +2,59 @@ import React from "react";
 import { useNavigate } from "react-router";
 import NavBar from "../../NavBar/NavBar";
 
-const createStudent = async () => {
-  const campoNombre = document.getElementById("nombre");
-  const campoFechaNacimiento = document.getElementById("fecha-nacimiento");
-  
 
-  const nombre = campoNombre.value;
-  const fechaNacimiento = campoFechaNacimiento.value;
-  const sexo = document.getElementById('sexo-masculino-radio').checked ? "Masculino": "Femenino"
-  console.log(sexo);
-
-
-  
-  
-
-
-  const student = { nombre: nombre, fechaNacimiento: fechaNacimiento,sexo:sexo,
-    materias:{espanol:[0,0,0,0],matematicas:[0,0,0,0],naturales:[0,0,0,0],sociales:[0,0,0,0]},
-    asistencia:[{fecha:new Date().toISOString().split('T')[0],status:"P",notes:""}]
-  };
-
-  const response = await fetch(`${process.env.REACT_APP_SERVER}/students`, {
-    method: "post",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-
-    body: JSON.stringify(student),
-  });
-
-  console.log(response);
-
-  if (response.status === 200) {
-    alert("El estudiante fue insertado correctamente");
-  } else {
-    alert("Error al insertar estudiante");
-  }
-
-  campoNombre.value = "";
-  campoFechaNacimiento.value = "";
-};
 
 const StudentFormCreate = ({onSignOut,loadUser}) => {
   const navigate = useNavigate();
 
   const goTostudentList = () => {
-    navigate("/studentList");
+    navigate("/StudentList");
   };
+
+
+  const createStudent = async () => {
+    const campoNombre = document.getElementById("nombre");
+    const campoFechaNacimiento = document.getElementById("fecha-nacimiento");
+    
+  
+    const nombre = campoNombre.value;
+    const fechaNacimiento = campoFechaNacimiento.value;
+    const sexo = document.getElementById('sexo-masculino-radio').checked ? "Masculino": "Femenino"
+  
+  
+    
+    
+  
+  
+    const student = { nombre: nombre, fechaNacimiento: fechaNacimiento,sexo:sexo,
+      materias:{espanol:[0,0,0,0],matematicas:[0,0,0,0],naturales:[0,0,0,0],sociales:[0,0,0,0]},
+      asistencia:[{fecha:new Date().toISOString().split('T')[0],status:"P",notes:""}]
+    };
+  
+    const response = await fetch(`${process.env.REACT_APP_SERVER}/students`, {
+      method: "post",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+  
+      body: JSON.stringify(student),
+    });
+  
+
+  
+    if (response.status === 200) {
+      alert("El estudiante fue insertado correctamente");
+      goTostudentList()
+    
+    } else {
+      alert("Error al insertar estudiante");
+    }
+  
+    campoNombre.value = "";
+    campoFechaNacimiento.value = "";
+  };
+
 
   return (
     <div>

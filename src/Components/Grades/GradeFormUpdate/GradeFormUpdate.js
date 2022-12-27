@@ -3,7 +3,43 @@ import { useNavigate } from "react-router";
 
 import NavBar from "../../NavBar/NavBar";
 
-const updateGrade = async (grade) => {
+
+
+
+
+const GradeFormUpdate = ({grade,onSignOut,loadUser}) => {
+    
+
+  
+
+    const nombreMateria = 
+    grade.materias.espanol ? "Lengua Española": 
+    grade.materias.matematicas ? "Matemáticas" : 
+    grade.materias.sociales ? "Ciencias Sociales" : 
+    "Ciencias Naturales"
+
+
+    const subject = 
+    grade.materias.espanol ? grade.materias.espanol: 
+    grade.materias.matematicas ? grade.materias.matematicas : 
+    grade.materias.sociales ?  grade.materias.sociales : 
+    grade.materias.naturales
+
+
+    const [primerParcial,setPrimerParcial] = useState(subject[0])
+    const [segundoParcial,setSegundoParcial] = useState(subject[1])
+    const [practicasYtareas,setPracticasYtareas] = useState(subject[2])
+    const [examenFinal,setExamenFinal] = useState(subject[3])
+   
+
+  const navigate = useNavigate();
+
+  const goToGradeList = () => {
+    navigate("/GradeList");
+  };
+
+
+  const updateGrade = async (grade) => {
   
 
     const primerParcial = document.getElementById("primer-parcial").value;
@@ -53,10 +89,11 @@ const updateGrade = async (grade) => {
     body: JSON.stringify(grade),
   });
 
-  console.log(response);
+ 
 
   if (response.status === 200) {
     alert("La calificacion fue actualizada correctamente");
+    goToGradeList()
   } else if (response.status===304) {
     alert("La calificacion no fue modificada");
   }else{
@@ -65,42 +102,6 @@ const updateGrade = async (grade) => {
 
 
 };
-
-
-
-
-const GradeFormUpdate = ({grade,onSignOut,loadUser}) => {
-    
-
-  
-
-    const nombreMateria = 
-    grade.materias.espanol ? "Lengua Española": 
-    grade.materias.matematicas ? "Matemáticas" : 
-    grade.materias.sociales ? "Ciencias Sociales" : 
-    "Ciencias Naturales"
-
-
-    const subject = 
-    grade.materias.espanol ? grade.materias.espanol: 
-    grade.materias.matematicas ? grade.materias.matematicas : 
-    grade.materias.sociales ?  grade.materias.sociales : 
-    grade.materias.naturales
-
-
-    const [primerParcial,setPrimerParcial] = useState(subject[0])
-    const [segundoParcial,setSegundoParcial] = useState(subject[1])
-    const [practicasYtareas,setPracticasYtareas] = useState(subject[2])
-    const [examenFinal,setExamenFinal] = useState(subject[3])
-   
-
-  const navigate = useNavigate();
-
-  const goToGradeList = () => {
-    navigate("/GradeList");
-  };
-
-
 
 
   
@@ -138,11 +139,11 @@ const GradeFormUpdate = ({grade,onSignOut,loadUser}) => {
 
             {
                primerParcial>=0 && primerParcial<=20 ? 
-               <div class="valid-feedback">
+               <div className="valid-feedback">
                   Dentro del Rango
               </div>
                :
-               <div class="invalid-feedback">
+               <div className="invalid-feedback">
                   El rango a calificar es de 0 a 20
               </div>
               
@@ -162,11 +163,11 @@ const GradeFormUpdate = ({grade,onSignOut,loadUser}) => {
 
             {
                segundoParcial>=0 && segundoParcial<=20 ? 
-               <div class="valid-feedback">
+               <div className="valid-feedback">
                   Dentro del Rango
               </div>
                :
-               <div class="invalid-feedback">
+               <div className="invalid-feedback">
                   El rango a calificar es de 0 a 20
               </div>
               
@@ -186,11 +187,11 @@ const GradeFormUpdate = ({grade,onSignOut,loadUser}) => {
 
             {
                practicasYtareas>=0 && practicasYtareas<=30 ? 
-               <div class="valid-feedback">
+               <div className="valid-feedback">
                   Dentro del Rango
               </div>
                :
-               <div class="invalid-feedback">
+               <div className="invalid-feedback">
                   El rango a calificar es de 0 a 30
               </div>
               
@@ -210,12 +211,12 @@ const GradeFormUpdate = ({grade,onSignOut,loadUser}) => {
             }
 
             {
-               segundoParcial>=0 && segundoParcial<=30 ? 
-               <div class="valid-feedback">
+               examenFinal>=0 && examenFinal<=30 ? 
+               <div className="valid-feedback">
                   Dentro del Rango
               </div>
                :
-               <div class="invalid-feedback">
+               <div className="invalid-feedback">
                   El rango a calificar es de 0 a 30
               </div>
               

@@ -10,7 +10,7 @@ const StudentList = (props) => {
     const [students, setStudents] = useState([]);
     const [studentName, setStudentName] = useState("")
 
-    const { user, onSignOut, onSelectStudent, loadUser } = props;
+    const { onSignOut, onSelectStudent, loadUser } = props;
 
     const navigate = useNavigate();
 
@@ -90,7 +90,6 @@ const StudentList = (props) => {
                     <tbody>
 
                         {students.map((student, row) => {
-                            console.log(student);
                             return <StudentItem student={student} key={row + 1} row={row + 1} fetchStudents={fetchStudents} onSelectStudent={onSelectStudent} />
                         })}
 

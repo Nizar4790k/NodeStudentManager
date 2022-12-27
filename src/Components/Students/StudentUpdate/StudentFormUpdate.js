@@ -1,49 +1,53 @@
 import React from "react";
 import { useNavigate } from "react-router";
 
-const updateStudent = async (student) => {
-  const campoNombre = document.getElementById("nombre");
-  const campoFechaNacimiento = document.getElementById("fecha-nacimiento");
-  
 
-  student.nombre = campoNombre.value;
-  student.fechaNacimiento = campoFechaNacimiento.value;
-  student.sexo = document.getElementById('sexo-masculino-radio').checked ? "Masculino":"Femenino"
-  
-
- 
-  
-
-
-  const response = await fetch(`${process.env.REACT_APP_SERVER}/students`, {
-    method: "PUT",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-
-    body: JSON.stringify(student),
-  });
-
-  console.log(response);
-
-  if (response.status === 200) {
-    alert("El estudiante fue actualizado correctamente");
-  } else if (response.status===304) {
-    alert("El estudiante no fue modificado");
-  }else{
-    alert("El estudiante no fue encontrado");
-  }
-
-
-};
 
 const StudentFormUpdate = ({student}) => {
   
+
   const navigate = useNavigate();
 
   const goToStudentList = () => {
     navigate("/StudentList");
+  };
+
+  const updateStudent = async (student) => {
+    const campoNombre = document.getElementById("nombre");
+    const campoFechaNacimiento = document.getElementById("fecha-nacimiento");
+    
+  
+    student.nombre = campoNombre.value;
+    student.fechaNacimiento = campoFechaNacimiento.value;
+    student.sexo = document.getElementById('sexo-masculino-radio').checked ? "Masculino":"Femenino"
+    
+  
+   
+    
+  
+  
+    const response = await fetch(`${process.env.REACT_APP_SERVER}/students`, {
+      method: "PUT",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+      },
+  
+      body: JSON.stringify(student),
+    });
+  
+    
+  
+    if (response.status === 200) {
+      alert("El estudiante fue actualizado correctamente");
+      goToStudentList();
+    } else if (response.status===304) {
+      alert("El estudiante no fue modificado");
+    }else{
+      alert("El estudiante no fue encontrado");
+    }
+  
+  
   };
 
   return (

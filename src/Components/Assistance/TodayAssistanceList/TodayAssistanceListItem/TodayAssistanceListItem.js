@@ -1,23 +1,16 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router";
 
 
 
 
 
-const TodayAssistenceListItem = ({ assistance, row, subject, onSelectGrade }) => {
+
+const TodayAssistenceListItem = ({ assistance, row}) => {
 
 
 
     const [excuseFieldIsEnabled, setExcuseFieldEnabled] = useState(false)
     const [notes, setNotes] = useState(assistance.asistencia.notes);
-
-
-
-
-    console.log(assistance);
-
-
 
     const onChangeAssistenceStatus = (event) => {
 
@@ -90,7 +83,7 @@ const TodayAssistenceListItem = ({ assistance, row, subject, onSelectGrade }) =>
             body: JSON.stringify(assistance),
         });
 
-        console.log(response);
+    
 
         if (response.status === 200) {
             alert("La asistencia fue actualizada correctamente");
@@ -102,13 +95,6 @@ const TodayAssistenceListItem = ({ assistance, row, subject, onSelectGrade }) =>
 
 
     }
-
-
-
-
-
-
-
 
     return (
 
@@ -183,7 +169,7 @@ const TodayAssistenceListItem = ({ assistance, row, subject, onSelectGrade }) =>
                         {
                                 assistance.asistencia.status === 'E' || excuseFieldIsEnabled ?
                                 <input type="text" className="form-control mb-2 mr-sm-2" id="text-excuse" placeholder="" defaultValue={notes} onChange={onChangeNote}></input> :
-                                <input type="text" className="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="" disabled></input>
+                                <input type="text" className="form-control mb-2 mr-sm-2" id="inlineFormInputName2" placeholder="" defaultValue={""} disabled></input>
                         }
                         </div>
                      </div>

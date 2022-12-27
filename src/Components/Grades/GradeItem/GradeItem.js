@@ -16,7 +16,6 @@ const GradeItem = ({ grade, row,onSelectGrade }) => {
 
 
     const goToGradeFormUpdate = (selectedGrade) => {
-        console.log(selectedGrade)
         navigate("/GradeFormUpdate");
         onSelectGrade(selectedGrade)
       };

@@ -1,6 +1,5 @@
 import React,{ useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { useNavigate } from "react-router";
 
 import Login from './Components/Login/Login';
 import Register from './Components/Register/Register';
@@ -48,13 +47,12 @@ function App() {
   };
 
   const onSelectStudent = (student)=>{
-    console.log(student)
         
     setSelectedStudent(student)
   }
 
   const onSelectGrade = (grade)=>{
-    console.log(grade)
+    
         
     setSelectedGrade(grade)
   }

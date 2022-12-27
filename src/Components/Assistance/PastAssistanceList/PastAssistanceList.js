@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import NavBar from "../../NavBar/NavBar";
 
 import { useNavigate } from "react-router";
-import AssistenceListItem from "../AssistanceListItem/AsistanceListItem";
+import PastAssistenceListItem from "./PastAssistanceListItem/PastAsistanceListItem";
 
 
 const PastAssistanceList = (props) => {
@@ -11,7 +11,7 @@ const PastAssistanceList = (props) => {
     const [selectedDate,setSelectedDate] = useState(new Date().toISOString().split('T')[0])
 
 
-    const { user, onSignOut, loadUser } = props;
+    const { onSignOut, loadUser } = props;
 
     
 
@@ -102,9 +102,8 @@ const PastAssistanceList = (props) => {
                         {assistance.map((assistance, row) => {
                             console.log(assistance)
 
-                            return <AssistenceListItem assistance={assistance} key={row + 1} row={row + 1} />
+                            return <PastAssistenceListItem assistance={assistance} key={row + 1} row={row + 1} />
                         })}
-
 
 
 

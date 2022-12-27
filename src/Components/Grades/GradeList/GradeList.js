@@ -11,7 +11,7 @@ const GradeList = (props) => {
     const [grades, setGrades] = useState([]);
     const [subject,setSubject] = useState("Lengua Española")
 
-    const { user, onSignOut, loadUser,onSelectGrade } = props;
+    const { onSignOut, loadUser,onSelectGrade } = props;
 
     
 
@@ -22,7 +22,6 @@ const GradeList = (props) => {
 
         const response = await fetch(`${process.env.REACT_APP_SERVER}/grades?subject=${subject}`);
         const grades = await response.json();
-        console.log(grades)
         setGrades(grades)
        
 

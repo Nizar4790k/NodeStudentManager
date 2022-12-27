@@ -23,7 +23,6 @@ const TodayAssistanceList = (props) => {
 
         const response = await fetch(`${process.env.REACT_APP_SERVER}/assistance?date=${new Date().toISOString().split('T')[0]}`);
         const assistance = await response.json();
-        console.log(assistance)
         setAssistance(assistance)
        
 
